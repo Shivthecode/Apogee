@@ -110,7 +110,7 @@ const About = () => {
 
             {/* Details & Message */}
             <div className="text-center md:text-left">
-              <h4 className="text-2xl font-extrabold text-gray-900 mb-1">Shivansh Dwivedi</h4>
+              <h4 className="text-2xl font-extrabold text-gray-900 mb-1">Kuldeep Sahu</h4>
               <p className="text-[#DC2626] font-bold tracking-wider uppercase text-xs mb-3">Owner & Founder</p>
               
               <p className="text-gray-600 leading-relaxed text-base font-medium italic relative">

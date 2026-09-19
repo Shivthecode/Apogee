@@ -3,16 +3,25 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 
 // Import All Components
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Features from './components/Features';
 import About from './components/About';
 import Admissions from './components/Admissions';
 import Contact from './components/Contact';
-import Auth from './components/Auth';
-import Dashboard from './components/Dashboard';
+import Auth from './components/Login/Auth';
+import Dashboard from './pages/Dashboard';
 import Footer from './components/Footer';
 import Facilities from './components/Facilities';
 import Gallery from './components/Gallery';
+
+// Pages
+import Hero from './pages/Hero';
+import Features from './pages/Features';
+import Institute from './pages/Institute';
+import Library from './pages/Library';
+import Contactpage from './pages/Contactpage';
+
+// Context & Protection
+import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
 
 // Main Landing Page Flow
 const LandingPage = () => (
@@ -22,7 +31,7 @@ const LandingPage = () => (
     <About />
     <Facilities />
     <Admissions />
-    <Gallery/>
+    <Gallery />
     <Contact />
   </>
 );
@@ -30,29 +39,42 @@ const LandingPage = () => (
 // Helper component to hide Navbar/Footer on specific routes like Dashboard
 const Layout = ({ children }) => {
   const location = useLocation();
-  const isDashboard = location.pathname === '/dashboard';
+  // Agar aap chahein toh '/auth' par bhi Navbar/Footer hide kar sakte hain
+  const hideHeaderFooter = location.pathname === '/dashboard' || location.pathname === '/auth';
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans text-gray-900">
-      {!isDashboard && <Navbar />}
+      {!hideHeaderFooter && <Navbar />}
       
       {children}
       
-      {!isDashboard && <Footer />}
+      {!hideHeaderFooter && <Footer />}
     </div>
   );
 };
 
 export default function App() {
   return (
-    <Router>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Routes>
-      </Layout>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/institute" element={<Institute />} />
+            <Route path="/library" element={<Library />} />
+            <Route path="/Contact" element={<Contactpage />} />
+            <Route 
+              path="/dashboard" 
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              } 
+            />
+          </Routes>
+        </Layout>
+      </Router>
+    </AuthProvider>
   );
 }
