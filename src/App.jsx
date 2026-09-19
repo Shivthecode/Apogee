@@ -6,7 +6,7 @@ import Navbar from './components/Navbar';
 import About from './components/About';
 import Admissions from './components/Admissions';
 import Contact from './components/Contact';
-import Auth from './components/Login/Auth';
+import Auth from './components/login/Auth';
 import Dashboard from './pages/Dashboard';
 import Footer from './components/Footer';
 import Facilities from './components/Facilities';
