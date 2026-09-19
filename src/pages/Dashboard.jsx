@@ -1,3 +1,4 @@
+// src/pages/Dashboard.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth, db } from '../firebase';

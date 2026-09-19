@@ -36,18 +36,15 @@ const LandingPage = () => (
   </>
 );
 
-// Helper component to hide Navbar/Footer on specific routes like Dashboard
+// Helper component to hide Navbar/Footer on specific routes like Dashboard & Auth
 const Layout = ({ children }) => {
   const location = useLocation();
-  // Agar aap chahein toh '/auth' par bhi Navbar/Footer hide kar sakte hain
   const hideHeaderFooter = location.pathname === '/dashboard' || location.pathname === '/auth';
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans text-gray-900">
       {!hideHeaderFooter && <Navbar />}
-      
       {children}
-      
       {!hideHeaderFooter && <Footer />}
     </div>
   );
@@ -63,7 +60,7 @@ export default function App() {
             <Route path="/auth" element={<Auth />} />
             <Route path="/institute" element={<Institute />} />
             <Route path="/library" element={<Library />} />
-            <Route path="/Contact" element={<Contactpage />} />
+            <Route path="/contact" element={<Contactpage />} />
             <Route 
               path="/dashboard" 
               element={
